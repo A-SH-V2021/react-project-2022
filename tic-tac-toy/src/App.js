@@ -13,6 +13,7 @@ function App() {
   } = useProductsContext();
   return (
     <Wrapper>
+      <h1>tic tac toe</h1>
       <div className="container">
         {numbers.map((_, idx) => {
           return (
@@ -37,14 +38,21 @@ const Wrapper = styled.main`
   height: 100vh;
   text-align: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  h1{
+    margin-top: 5rem;
+    text-transform: capitalize;
+  }
   .container {
     display: grid;
     max-width: 684px;
-    height: 80%;
+    height: 90%;
     grid-template-columns: auto auto auto;
     grid-template-rows: auto auto auto;
     gap: 10px;
+   padding-bottom: 3rem;
   }
+  
 `;

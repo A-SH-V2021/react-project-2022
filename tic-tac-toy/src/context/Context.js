@@ -53,6 +53,20 @@ export const ProductsProvider = ({ children }) => {
       }
     }
   };
+  const handleReset = () => {
+    setState({ player: "Circle",
+    posations: [
+      "Empty",
+      "Empty",
+      "Empty",
+      "Empty",
+      "Empty",
+      "Empty",
+      "Empty",
+      "Empty",
+      "Empty",
+    ],})
+  }
   useEffect(() => {
     checkWinner();
   }, [state.posations]);
@@ -65,6 +79,7 @@ export const ProductsProvider = ({ children }) => {
         setState,
         handleTurn,
         infoWiner,
+        handleReset
       }}
     >
       {children}
