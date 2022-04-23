@@ -14,7 +14,7 @@ function App() {
   return (
     <Wrapper>
       <h1>tic tac toe</h1>
-      <div className="container">
+      <div className="container" >
         {numbers.map((_, idx) => {
           return (
             <Squaer
@@ -54,5 +54,7 @@ const Wrapper = styled.main`
     gap: 10px;
    padding-bottom: 3rem;
   }
-  
+  .disableClick{
+    pointer-events: none;
+  }
 `;

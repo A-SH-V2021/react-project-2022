@@ -46,27 +46,30 @@ export const ProductsProvider = ({ children }) => {
     ];
     for (let items of winningConditions) {
       if (items.every((w) => p[w] === "Cross")) {
-        setInfoWiner({ iswiner: true, winner: "X WON!" });
+        setInfoWiner({ iswiner: true, winner: "X" });
       }
       if (items.every((w) => p[w] === "Circle")) {
-        setInfoWiner({ iswiner: true, winner: "O WON!!!" });
+        setInfoWiner({ iswiner: true, winner: "O!" });
       }
     }
   };
   const handleReset = () => {
-    setState({ player: "Circle",
-    posations: [
-      "Empty",
-      "Empty",
-      "Empty",
-      "Empty",
-      "Empty",
-      "Empty",
-      "Empty",
-      "Empty",
-      "Empty",
-    ],})
-  }
+    setState({
+      player: "Circle",
+      posations: [
+        "Empty",
+        "Empty",
+        "Empty",
+        "Empty",
+        "Empty",
+        "Empty",
+        "Empty",
+        "Empty",
+        "Empty",
+      ],
+    });
+    setInfoWiner({ iswiner: false, winner: "" });
+  };
   useEffect(() => {
     checkWinner();
   }, [state.posations]);
@@ -79,7 +82,7 @@ export const ProductsProvider = ({ children }) => {
         setState,
         handleTurn,
         infoWiner,
-        handleReset
+        handleReset,
       }}
     >
       {children}
