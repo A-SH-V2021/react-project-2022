@@ -1,20 +1,21 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components';
 import { useProductsContext } from "../context/Context";
 
-const Result = () => {
-  const { infoWiner, handleReset } = useProductsContext();
+const Equal = () => {
+  const { handleReset } = useProductsContext();
+
   return (
     <Wrapper>
-      <h3>winner is: {infoWiner.winner}</h3>
-      <div className="">
-        <button onClick={handleReset}>Reset</button>
-      </div>
-    </Wrapper>
-  );
-};
+   <h3>the game is equal</h3>
+    <div className="">
+      <button onClick={handleReset}>Reset</button>
+    </div>
+  </Wrapper>
+  )
+}
 
-export default Result;
+export default Equal
 const Wrapper = styled.div`
   width: 40%;
   display: flex;

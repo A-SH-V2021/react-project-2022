@@ -1,20 +1,20 @@
 import { useState } from "react";
 import Squaer from "./components/Squaer";
 import styled from "styled-components";
-import Result from './components/Result'
+import Result from "./components/Result";
+import Equal from "./components/Equal";
 import { useProductsContext } from "./context/Context";
 
 function App() {
-  const {
-    numbers,
-    state,
-    handleTurn,
-    infoWiner,
-  } = useProductsContext();
+  const { numbers, equal, state, handleTurn, infoWiner } =
+    useProductsContext();
   return (
     <Wrapper>
       <h1>tic tac toe</h1>
-      <div className="container" >
+      <div
+        className="container"
+        style={infoWiner.iswiner ? { pointerEvents: "none" } : {}}
+      >
         {numbers.map((_, idx) => {
           return (
             <Squaer
@@ -26,7 +26,8 @@ function App() {
           );
         })}
       </div>
-      {infoWiner.iswiner && <Result/>}
+      {infoWiner.iswiner && <Result />}
+      {equal && !infoWiner.iswiner && <Equal />}
     </Wrapper>
   );
 }
@@ -41,8 +42,7 @@ const Wrapper = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  h1{
-    margin-top: 5rem;
+  h1 {
     text-transform: capitalize;
   }
   .container {
@@ -52,9 +52,5 @@ const Wrapper = styled.main`
     grid-template-columns: auto auto auto;
     grid-template-rows: auto auto auto;
     gap: 10px;
-   padding-bottom: 3rem;
-  }
-  .disableClick{
-    pointer-events: none;
   }
 `;

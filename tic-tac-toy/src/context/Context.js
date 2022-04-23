@@ -5,6 +5,7 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const ProductsContext = createContext();
 
 export const ProductsProvider = ({ children }) => {
+  const [equal, setEqual] = useState(false);
   const [infoWiner, setInfoWiner] = useState({
     iswiner: false,
     winner: "",
@@ -52,6 +53,9 @@ export const ProductsProvider = ({ children }) => {
         setInfoWiner({ iswiner: true, winner: "O!" });
       }
     }
+    if (!p.includes("Empty")) {
+      setEqual(true);
+    }
   };
   const handleReset = () => {
     setState({
@@ -69,6 +73,7 @@ export const ProductsProvider = ({ children }) => {
       ],
     });
     setInfoWiner({ iswiner: false, winner: "" });
+    setEqual(false);
   };
   useEffect(() => {
     checkWinner();
@@ -78,6 +83,7 @@ export const ProductsProvider = ({ children }) => {
     <ProductsContext.Provider
       value={{
         numbers,
+        equal,
         state,
         setState,
         handleTurn,
