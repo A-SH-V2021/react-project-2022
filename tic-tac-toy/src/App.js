@@ -6,11 +6,16 @@ import Equal from "./components/Equal";
 import { useProductsContext } from "./context/Context";
 
 function App() {
-  const { numbers, equal, state, handleTurn, infoWiner } =
-    useProductsContext();
+  const { numbers, equal, state, handleTurn, infoWiner } = useProductsContext();
   return (
     <Wrapper>
       <h1>tic tac toe</h1>
+      {!infoWiner.iswiner?
+      <p>
+        it's <span>{state.player}</span> turn
+      </p>:''
+      
+    }
       <div
         className="container"
         style={infoWiner.iswiner ? { pointerEvents: "none" } : {}}
@@ -44,6 +49,16 @@ const Wrapper = styled.main`
   align-items: center;
   h1 {
     text-transform: capitalize;
+  }
+  p{
+    text-transform: capitalize;
+    margin: 0 0 0.8rem 0;
+  }
+  p>span{
+    background-color: #999;
+    color: yellow;
+    border-radius: 50%;
+    padding: 0.5rem;
   }
   .container {
     display: grid;

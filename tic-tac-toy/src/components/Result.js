@@ -16,7 +16,7 @@ const Result = () => {
 
 export default Result;
 const Wrapper = styled.div`
-  width: 40%;
+  width: 20rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
