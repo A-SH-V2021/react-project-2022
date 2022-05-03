@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import { useProductsContext } from "../context/Context";
 
 const Searching = () => {
+  const {setSearching,handleRequest}=useProductsContext()
+
   return (
     <Wrapper>
       <div className="">
-        <input type="text" />
-        <button>get info</button>
+        <input type="text" placeholder="Enter name of crypto" onChange={(e)=>setSearching(e.target.value)}/>
+        <button onClick={handleRequest}>get info</button>
       </div>
     </Wrapper>
   );
