@@ -3,7 +3,7 @@ import styled from 'styled-components'
 const Header = () => {
   return (
     <Wrapper>
-        <h1>Crypto Curency</h1>
+        <h1>Cryptocurency</h1>
     </Wrapper>
   )
 }
@@ -11,5 +11,8 @@ const Header = () => {
 export default Header
 const Wrapper= styled.main`
 background: #E4E6C3;
-padding: 1rem;
+padding: 0.5rem;
+h1{
+  margin: 0;
+}
 `

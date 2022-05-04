@@ -7,6 +7,7 @@ const ProductsContext = createContext();
 
 export const ProductsProvider = ({ children }) => {
   const [searching, setSearching] = useState("");
+  const [info, setInfo] = useState({});
   const [image, setImage] = useState(null);
   const [title, setTitle] = useState("");
   const [symbol, setSymbol] = useState(null);
@@ -16,26 +17,37 @@ export const ProductsProvider = ({ children }) => {
   const handleRequest = async () => {
     const request = await axios.get(`${endPoint}${searching}`);
     let { data } = request;
-    console.log(data);
-    // name,symbol,description
+    const {
+      id,
+      image: { large },
+      name,
+      symbol,
+      links: { homepage },
+      market_data: {
+        current_price: { usd },
+      },
+      description:{en}
+    } = data;
+    const info = {
+      id,
+      image: large,
+      name,
+      symbol,
+      link: homepage[0],
+      price: usd,
+      description:en,
+    };
+    setInfo(info);
+    //bitcoin, name,symbol,description
   };
-
+ 
   return (
     <ProductsContext.Provider
       value={{
         searching,
         setSearching,
         handleRequest,
-        image,
-        setImage,
-        title,
-        setTitle,
-        symbol,
-        setSymbol,
-        ind,
-        setInd,
-        usd,
-        setUsd,
+        info,
       }}
     >
       {children}
