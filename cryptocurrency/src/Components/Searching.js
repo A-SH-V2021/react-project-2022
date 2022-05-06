@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { useProductsContext } from "../context/Context";
 
 const Searching = () => {
-  const {setSearching,handleRequest}=useProductsContext()
+  const {searching,setSearching,handleRequest}=useProductsContext()
 
   return (
     <Wrapper>
       <div className="">
-        <input type="text" placeholder="Enter name of crypto" onChange={(e)=>setSearching(e.target.value)}/>
+        <input value={searching} type="text" placeholder="Enter name of crypto" onChange={(e)=>setSearching(e.target.value)}/>
         <button onClick={handleRequest}>get info</button>
       </div>
     </Wrapper>

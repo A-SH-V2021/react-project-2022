@@ -15,6 +15,7 @@ export const ProductsProvider = ({ children }) => {
   const [usd, setUsd] = useState("");
 
   const handleRequest = async () => {
+    setSearching('')
     const request = await axios.get(`${endPoint}${searching}`);
     let { data } = request;
     const {
@@ -35,7 +36,7 @@ export const ProductsProvider = ({ children }) => {
       symbol,
       link: homepage[0],
       price: usd,
-      description:en,
+      description:JSON.stringify(en),
     };
     setInfo(info);
     //bitcoin, name,symbol,description
