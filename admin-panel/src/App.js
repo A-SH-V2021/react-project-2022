@@ -1,18 +1,13 @@
+import React from 'react';
+import {useProductsContext} from './context/Context'
 import "./App.css";
-import Container from "./Components/Container";
-import Header from "./Components/Header";
-import Searching from "./Components/Searching";
-import { useProductsContext } from "./context/Context";
+
 function App() {
   const {}=useProductsContext()
-
-  return (
-    <div className="App">
-      <Header />
-      <Searching />
-      <Container/>
-    </div>
-  );
+ 
+  return <div className="App">
+    <h1>admin panel</h1>
+  </div>;
 }
 
 export default App;
