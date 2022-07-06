@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from "react";
+import ShoppingCartCanvas from "../components/ShoppingCartCanvas";
 
 // types
 type ShoppingCartProviderProps = {
@@ -11,21 +12,29 @@ type CartItem = {
 };
 
 type ShoppingCartContext = {
-  
+  openCart: () => void;
+  closeCart: () => void;
   getItemQuantity: (id: number) => number;
   increaseCartQuantity: (id: number) => void;
   decreaseCartQuantity: (id: number) => void;
   removeFromCart: (id: number) => void;
- 
+  cartQuantity: number;
+  cartItems: CartItem[];
+  isOpenCart:boolean,
 };
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
 
+export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [isOpenCart, setIsOpenCart] = useState(false);
+  
+  const cartQuantity = cartItems.reduce(
+    (quantity, item) => item.quantity + quantity,
+    0
+  );
 
-export function ShoppingCartProvider({ children }: ShoppingCartProvciderProps) {
-    const [cartItems, setCartItems] = useState<CartItem[]>([]);
-    
-    // functions
+  // functions
   function getItemQuantity(id: number) {
     return cartItems.find((item) => item.id === id)?.quantity || 0;
   }
@@ -64,20 +73,28 @@ export function ShoppingCartProvider({ children }: ShoppingCartProvciderProps) {
       return currItems.filter((item) => item.id !== id);
     });
   }
+  const openCart = () => setIsOpenCart(true);
+  const closeCart = () => setIsOpenCart(false);
 
   return (
     <ShoppingCartContext.Provider
       value={{
+        openCart,
+        closeCart,
         getItemQuantity,
         increaseCartQuantity,
         decreaseCartQuantity,
         removeFromCart,
+        cartQuantity,
+        cartItems,
+        isOpenCart,
       }}
     >
       {children}
+      <ShoppingCartCanvas />
     </ShoppingCartContext.Provider>
   );
 }
 export function useShoppingCart() {
-    return useContext(ShoppingCartContext);
-  }
+  return useContext(ShoppingCartContext);
+}
