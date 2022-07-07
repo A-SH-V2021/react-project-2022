@@ -9,7 +9,6 @@ type StoreItemProps = {
   imgUrl: string;
 };
 const StoreItem = ({ id, name, price, imgUrl }: StoreItemProps) => {
-  
   const {
     getItemQuantity,
     increaseCartQuantity,
@@ -33,7 +32,9 @@ const StoreItem = ({ id, name, price, imgUrl }: StoreItemProps) => {
           <span className="text-muted">{formatCurrency(price)}</span>
         </Card.Title>
         {quntity === 0 ? (
-          <Button className="w-100" onClick={()=>increaseCartQuantity(id)}>ADD TO CART</Button>
+          <Button className="w-100" onClick={() => increaseCartQuantity(id)}>
+            ADD TO CART
+          </Button>
         ) : (
           <div
             className="d-flex flex-column align-items-center"
@@ -43,11 +44,11 @@ const StoreItem = ({ id, name, price, imgUrl }: StoreItemProps) => {
               className="d-flex justify-content-center align-items-center"
               style={{ gap: 3 }}
             >
-              <Button onClick={() => increaseCartQuantity(id)}>+</Button>
+              <Button onClick={() => decreaseCartQuantity(id)}>-</Button>
               <div className="">
                 <span className="fs-3">{quntity}</span>in cart
               </div>
-              <Button onClick={() => decreaseCartQuantity(id)}>-</Button>
+              <Button onClick={() => increaseCartQuantity(id)}>+</Button>
             </div>
             <Button
               variant="danger"
