@@ -1,28 +1,33 @@
 import React from "react";
 import styled from "styled-components";
 
-const WetherShow = () => {
+const WetherShow = ({ data }) => {
+  console.log(data);
+  const { name } = data;
+  //
   return (
     <Wrapper>
       <div className="location">
-        <h2>Tehran</h2>
+        <h2>{name}</h2>
       </div>
       <div className="temp">
-        <p>60 °F </p>
+        {data.main ? <p>{data.main.temp} °F </p> : null}
       </div>
       <div className="desc">
         <p>Cloudy</p>
       </div>
       <div className="bottom">
-        <div className="fell">
-          60 °F <span>feels like</span>
+        <div className="btn-container">
+          <div className="fell">
+            60 °F <span>feels like</span>
+          </div>
+          <div className="humidity">
+            20% <span>humidity</span>
+          </div>
+          <div className="windy">
+            20MPH <span>wind speed</span>
+          </div>
         </div>
-        <div className="humidity">
-          20% <span>humidity</span>
-        </div>
-        <footer className="windy">
-          20MPH <span>wind speed</span>
-        </footer>
       </div>
     </Wrapper>
   );
@@ -36,7 +41,7 @@ const Wrapper = styled.div`
   .location {
     text-align: center;
     font-size: 2rem;
-    color: #e25959;
+    color: #cf0e8f;
     h2 {
       font-weight: 700;
       letter-spacing: 0.2rem;
@@ -53,7 +58,7 @@ const Wrapper = styled.div`
     text-align: center;
     font-size: 2rem;
   }
-  .bottom {
+  .btn-container {
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -61,7 +66,7 @@ const Wrapper = styled.div`
     justify-content: space-around;
     padding: 0.5rem 0px 4rem 0px;
   }
-  .bottom > div {
+  .btn-container > div {
     text-align: center;
   }
   footer {
