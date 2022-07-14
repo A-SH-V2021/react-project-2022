@@ -60,9 +60,7 @@ const Wrapper = styled.div`
   height: 100vh;
   margin: auto;
   text-transform: capitalize;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+ text-align: center;
   align-items: center;
   h1 {
     margin: 1rem 0px;
