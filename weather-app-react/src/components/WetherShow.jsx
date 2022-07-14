@@ -1,33 +1,33 @@
 import React from "react";
 import styled from "styled-components";
 
-const WetherShow = ({ data }) => {
-  console.log(data);
-  const { name } = data;
-  //
+const WetherShow = ({ data}) => {
+ console.log(data);
   return (
     <Wrapper>
       <div className="location">
-        <h2>{name}</h2>
+        <h2>{data.name}</h2>
       </div>
-      <div className="temp">
-        {data.main ? <p>{data.main.temp} °F </p> : null}
-      </div>
+      {/* (32°F − 32) × 5/9 = 0°C */}
+      <div className="temp">{data ? <p>{Math.floor((data.main.temp-32)*5/9)} °C </p> : null}</div>
       <div className="desc">
-        <p>Cloudy</p>
+        {data ? <p>{data.weather[0].description}</p> : null}
       </div>
       <div className="bottom">
-        <div className="btn-container">
+       
           <div className="fell">
-            60 °F <span>feels like</span>
+            {data ? `${data.main.feels_like}°C ` : null}
+            <span>feels like</span>
           </div>
           <div className="humidity">
-            20% <span>humidity</span>
+            {data ? `${data.main.humidity} %` : null}
+            <span>humidity</span>
           </div>
           <div className="windy">
-            20MPH <span>wind speed</span>
+            {data ? `${data.wind.speed} MPH` : null}
+            <span>wind speed</span>
           </div>
-        </div>
+      
       </div>
     </Wrapper>
   );
@@ -58,7 +58,7 @@ const Wrapper = styled.div`
     text-align: center;
     font-size: 2rem;
   }
-  .btn-container {
+  .bottom {
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -66,9 +66,7 @@ const Wrapper = styled.div`
     justify-content: space-around;
     padding: 0.5rem 0px 4rem 0px;
   }
-  .btn-container > div {
-    text-align: center;
-  }
+  
   footer {
     text-align: center;
   }

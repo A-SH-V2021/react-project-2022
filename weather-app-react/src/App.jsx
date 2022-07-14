@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import WetherShow from "./components/WetherShow";
 import styled from "styled-components";
+import Errorhandle from "./components/Errorhandle";
 
 function App() {
-  const [location, setLocation] = useState("tehran");
+  const [location, setLocation] = useState("berlin");
   const [data, setData] = useState("");
+  const [error, setError] = useState(false);
 
   const URL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=dfb240ff8dd3e699004d6f2b3777a045`;
 
@@ -12,11 +14,26 @@ function App() {
   const fetching = async (e) => {
     if (e.key === "Enter") {
       const data = await fetch(URL).then((response) => response.json());
-      setData(data);
-     setLocation('')
+      if (data.cod === "404") {
+        setError(true);
+        setData('')
+      } else {
+        setError(false);
+        setData(data);
+        setLocation("");
+      }
     }
-   
   };
+  const fetchingDeafult = async () => {
+    const data = await fetch(URL).then((response) => response.json());
+
+    setError(false);
+    setData(data);
+    setLocation("");
+  };
+  useEffect(() => {
+    fetchingDeafult();
+  }, []);
 
   return (
     <Wrapper>
@@ -29,9 +46,9 @@ function App() {
           onChange={(e) => setLocation(e.target.value)}
           placeholder="Enter Location"
         />
-        <button className="search">Serach</button>
       </div>
-      <WetherShow data={data}/>
+      {error ? <Errorhandle /> : null}
+      <WetherShow data={data} error={error} />
     </Wrapper>
   );
 }
@@ -57,17 +74,7 @@ const Wrapper = styled.div`
     padding: 0.5rem 0.4rem;
     border-radius: 5px;
   }
-  .search {
-    padding: 0.5rem;
-    background-color: #50ebe3;
-    color: black;
-    outline: none;
-    margin-left: 0.2rem;
-    border: 1px solid #2ed1c9;
-    border-radius: 5px;
-  }
-  .search:hover {
-  }
+ 
   @media screen and (min-width: 768px) {
     max-width: 70%;
   }
